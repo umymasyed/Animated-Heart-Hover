@@ -1,0 +1,201 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+#container {
+  width: 100vw;
+  height: 100vh;
+  background-color: #1a1a2e;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+}
+
+#heart {
+  width: 200px;
+  height: 200px;
+  background-color: #ff2957;
+  transform: rotate(45deg);
+  position: relative;
+  animation: pulse 1.5s ease-in-out infinite;
+  cursor: pointer;
+}
+
+.heart-inner {
+  width: 100%;
+  height: 100%;
+  background-color: #ff2957;
+  position: absolute;
+  top: 0;
+  left: 0;
+  filter: blur(20px);
+  opacity: 0.7;
+  transform: scale(1.1);
+}
+
+#heart::before,
+#heart::after {
+  content: "";
+  width: 200px;
+  height: 200px;
+  background-color: #ff2957;
+  border-radius: 50%;
+  position: absolute;
+}
+
+#heart::before {
+  top: -100px;
+  left: 0;
+}
+
+#heart::after {
+  top: 0;
+  left: -100px;
+}
+
+#heart:hover {
+  transform: rotate(45deg) scale(1.1);
+}
+
+#heart.clicked {
+  animation: explode 1s ease-out;
+}
+
+#instruction {
+  position: absolute;
+  bottom: 20px;
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+  font-size: 18px;
+  text-align: center;
+}
+
+#love-text {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: black;
+  font-family: "Arial", sans-serif;
+  font-size: 36px;
+  font-weight: bold;
+  opacity: 0;
+  text-shadow: 0 0 10px #ff69b4, 0 0 20px #ff69b4, 0 0 30px #ff69b4, 0 0 40px #ff1493, 0 0 50px #ff1493, 0 0 60px #ff1493;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+#love-text.text-animate {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1.2);
+  animation: glow 1.5s infinite alternate;
+}
+
+@keyframes glow {
+  0% {
+    text-shadow: 0 0 10px #ff69b4, 0 0 20px #ff69b4, 0 0 30px #ff69b4, 0 0 40px #ff1493, 0 0 50px #ff1493, 0 0 60px #ff1493;
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+  100% {
+    text-shadow: 0 0 20px #ff69b4, 0 0 30px #ff69b4, 0 0 40px #ff69b4, 0 0 50px #ff1493, 0 0 60px #ff1493, 0 0 70px #ff1493;
+    transform: translate(-50%, -50%) scale(1.3);
+  }
+}
+.hover-heart {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: #ff69b4;
+  transform: rotate(45deg);
+  pointer-events: none;
+  animation: floatUp 1s ease-out;
+}
+
+.hover-heart::before,
+.hover-heart::after {
+  content: "";
+  width: 20px;
+  height: 20px;
+  background-color: #ff69b4;
+  border-radius: 50%;
+  position: absolute;
+}
+
+.hover-heart::before {
+  top: -10px;
+  left: 0;
+}
+
+.hover-heart::after {
+  top: 0;
+  left: -10px;
+}
+
+@keyframes pulse {
+  0% {
+    transform: rotate(45deg) scale(1);
+  }
+  50% {
+    transform: rotate(45deg) scale(1.1);
+  }
+  100% {
+    transform: rotate(45deg) scale(1);
+  }
+}
+
+@keyframes explode {
+  0% {
+    transform: rotate(45deg) scale(1);
+  }
+  50% {
+    transform: rotate(45deg) scale(1.5);
+    opacity: 0.5;
+  }
+  100% {
+    transform: rotate(45deg) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInOut {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes floatUp {
+  0% {
+    transform: rotate(45deg) translateY(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(45deg) translateY(-100px) scale(0.5);
+    opacity: 0;
+  }
+}
+
+#heart {
+  --mouse-x: 0.5;
+  --mouse-y: 0.5;
+  box-shadow:
+    0 0 50px 10px rgba(255, 41, 87, 0.3),
+    0 0 100px 20px rgba(255, 41, 87, 0.2),
+    0 0 150px 30px rgba(255, 41, 87, 0.1),
+    calc(var(--mouse-x) * 100px - 50px) calc(var(--mouse-y) * 100px - 50px) 20px rgba(255, 255, 255, 0.3);
+  transition: box-shadow 0.2s ease;
+}
+
+#love-text.text-animate {
+  animation: fadeInOut 1s ease-in-out;
+  opacity: 1; /* Ensure it becomes visible during animation */
+}
